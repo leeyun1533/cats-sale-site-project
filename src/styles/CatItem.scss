@@ -1,0 +1,32 @@
+@import "./base.scss";
+
+.cat-item-container {
+    background-color: white;
+    margin: $s8 $s6;
+    border-radius: $s8;
+    width: $list-card-size-width;
+    height: $list-card-size-height;
+    
+     img {
+        border-radius: $card-border-radius;
+    }
+    .cat-item-detail {
+        padding: $s12 $s16;
+        .cat-item-detail-name {
+            font-size: $base-font-size-large;
+            margin-bottom: $s4;
+            font-weight: bold;
+        }
+        .cat-item-detail-age {
+            font-size: 14px;
+            color: $base-font-color-sm;
+        }
+        .cat-item-delete-button {
+            float: right;
+            color: red;
+            border: $button-border;
+            border-radius: $button-border-radius;
+            background-color: white;
+        }
+    }
+}

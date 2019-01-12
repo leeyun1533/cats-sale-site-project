@@ -1,0 +1,8 @@
+@import "./base.scss";
+
+.cats-sale-container {
+    max-width: 1280px;
+    @include flexbox;
+    @include justify-content(center);
+    @include flex-wrap(wrap);
+}
