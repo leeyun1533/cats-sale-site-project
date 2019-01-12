@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import _ from 'lodash';
+import CatList from './components/CatList.js'
+
 import './App.css';
 
 class App extends Component {
@@ -14,21 +18,21 @@ class App extends Component {
     this.getList()
   }
   async getList() {
-    const apiUrl = 'dummy/cats.json';
+    const apiUrl = 'dummy-data/cats.json';
 
     const { data } = await axios.get(apiUrl)
     this.setState({
       catList: data
     })
-    console.log(this.state.catList[0])
 
   }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <header>
           <span>관리자님 어서오세요.</span>
         </header>
+        <CatList data={this.state.catList}></CatList>
       </div>
     );
   }
