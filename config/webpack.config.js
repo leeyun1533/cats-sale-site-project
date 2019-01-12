@@ -23,6 +23,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -305,7 +306,6 @@ module.exports = function(webpackEnv) {
               options: {
                 formatter: require.resolve('react-dev-utils/eslintFormatter'),
                 eslintPath: require.resolve('eslint'),
-                
               },
               loader: require.resolve('eslint-loader'),
             },
@@ -370,10 +370,11 @@ module.exports = function(webpackEnv) {
                 babelrc: false,
                 configFile: false,
                 compact: false,
+                plugins: ['lodash'],
                 presets: [
                   [
                     require.resolve('babel-preset-react-app/dependencies'),
-                    { helpers: true },
+                    { helpers: true }
                   ],
                 ],
                 cacheDirectory: true,
@@ -546,6 +547,8 @@ module.exports = function(webpackEnv) {
         fileName: 'asset-manifest.json',
         publicPath: publicPath,
       }),
+      //lodash
+      new LodashModuleReplacementPlugin,
       // Moment.js is an extremely popular library that bundles large locale files
       // by default due to how Webpack interprets its code. This is a practical
       // solution that requires the user to opt into importing specific locales.
