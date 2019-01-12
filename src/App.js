@@ -3,7 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import CatList from './components/CatList.js'
 
-import './App.css';
+import './App.scss';
 
 class App extends Component {
   constructor(props) {
