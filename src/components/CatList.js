@@ -10,24 +10,29 @@ class CatList extends Component {
    removeCard: () => console.warn('onRemove not defined')
   }
   componentDidMount() {
-    console.log(this.props)
   }
 
   render() {
     const { data, removeCard } = this.props;
-    const adItem = {
+    let adItem = {
       ad: true,
-      _id: _.random(data.length+1)
     }
 
     let randomNum = 0
 
-    if(data.length>0){
-      randomNum = _.random(data.length-15,data.length)
-      data.splice(randomNum, 0, adItem);
+    if(data.length>0) {
+      if(data.length <= 50){
+        for(let i=20; i<50; i+=20) {
+          randomNum = _.random(i-15,i)
+          data.splice(randomNum, 0, adItem)
+        }
+      } else {
+        randomNum = _.random(data.length-15,data.length)
+        data.splice(randomNum, 0, adItem);
+      }
     }
 
-    const list = _.map(data, item => (<CatItem key={item._id} item={item} removeCard={removeCard}></CatItem>))
+    const list = _.map(data, (item,index) => (<CatItem key={index} item={item} removeCard={removeCard}></CatItem>))
 
     return (
       <div className="cats-sale-container">
