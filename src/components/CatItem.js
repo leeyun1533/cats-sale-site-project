@@ -26,19 +26,23 @@ class CatItem extends Component {
         gender,
         ad
     } = this.props.item;
-    const isAdCard = ad
+
     return (
       
       <div className="cat-item-container">
          {
-           isAdCard ? (
-              <div>
-                광고
+           ad ? (
+              <div className="cat-ad-card">
+                <div className="cat-ad-card-content">
+                  <span>사지 말고 입양<br></br>하세요!</span>
+                </div>
               </div>
          ) : (
-          <div>
-            <img src={imageUrl} alt="" width="100%" height="100px"/>
-            <div className="cat-item-detail">
+          <div className="cat-item-detail">
+            <div className="cat-item-detail-header" style = {{ backgroundImage: `url(${ imageUrl })`}}>
+              { gender === 'male' ? <span>수컷이다냥</span> : <span>암컷이다냥</span> }
+            </div>
+            <div className="cat-item-detail-body">
               <p className="cat-item-detail-name">{name}</p>
               <p className="cat-item-detail-age">{age}입니다.</p>
               <button className="cat-item-delete-button" onClick={this.clickRemoveButton}>삭제</button>
