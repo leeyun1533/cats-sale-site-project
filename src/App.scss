@@ -10,6 +10,8 @@
     width: 100%;
     height: 30px;
     font-size: $base-font-size;
+    font-weight: bold;
+    padding: $s12 0 0 10%;
     transition: top 0.2s;
   }
 }
