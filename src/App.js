@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       catList: [],
       preItemsLength: 0,
-      itemsLength: 70,
+      itemsLength: 50,
       prevScrollpos: window.pageYOffset
     }
 
