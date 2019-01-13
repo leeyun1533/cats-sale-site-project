@@ -7,26 +7,56 @@
     width: $list-card-size-width;
     height: $list-card-size-height;
     
-     img {
+    img {
         border-radius: $card-border-radius;
     }
     .cat-item-detail {
-        padding: $s12 $s16;
-        .cat-item-detail-name {
-            font-size: $base-font-size-large;
-            margin-bottom: $s4;
+        .cat-item-detail-header {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            border-radius: $card-border-radius;
+            color: white;
             font-weight: bold;
+            @include flexbox();
+            @include justify-content(flex-end);
+            @include align-items(flex-end);
         }
-        .cat-item-detail-age {
-            font-size: 14px;
-            color: $base-font-color-sm;
+        .cat-item-detail-body {
+            padding: $s12 $s16;
+            .cat-item-detail-name {
+                font-size: $base-font-size-large;
+                margin-bottom: $s4;
+                font-weight: bold;
+            }
+            .cat-item-detail-age {
+                font-size: 14px;
+                color: $base-font-color-sm;
+            }
+            .cat-item-delete-button {
+                float: right;
+                color: red;
+                border: $button-border;
+                border-radius: $button-border-radius;
+                background-color: white;
+            }
         }
-        .cat-item-delete-button {
-            float: right;
-            color: red;
-            border: $button-border;
-            border-radius: $button-border-radius;
-            background-color: white;
+    }
+    .cat-ad-card {
+        background-color: yellow;
+        border-radius: $s8;
+        width: $list-card-size-width;
+        height: $list-card-size-height;
+        @include flexbox();
+        @include flex-direction(column);
+        @include justify-content(center);
+        .cat-ad-card-content {
+            background: white;
+            text-align: center;
+            font-size: $base-font-size-large + 2;
+            padding: $s16;
+            line-height: $base-line-hight;
+            font-weight: bold;
         }
     }
 }
