@@ -21,8 +21,8 @@ class CatList extends Component {
     let randomNum = 0
 
     if(data.length>0) {
-      if(data.length <= 50){
-        for(let i=20; i<50; i+=20) {
+      if(data.length <= 40){
+        for(let i=20; i<40; i+=20) {
           randomNum = _.random(i-15,i)
           data.splice(randomNum, 0, adItem)
         }

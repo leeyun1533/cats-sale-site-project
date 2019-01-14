@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import update from 'react-addons-update'
 import CatList from './components/CatList.js'
 
 import './App.scss';
@@ -13,7 +12,7 @@ class App extends Component {
     this.state = {
       catList: [],
       preItemsLength: 0,
-      itemsLength: 50,
+      itemsLength: 40,
       prevScrollpos: window.pageYOffset
     }
 
@@ -63,7 +62,7 @@ class App extends Component {
     let clientHeight = document.documentElement.clientHeight;
 
     if(scrollTop + clientHeight === scrollHeight) {
-      console.log('엥?')
+
       this.setState({
         preItemsLength: this.state.itemsLength,
         itemsLength: this.state.itemsLength+20
