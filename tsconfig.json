@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "isolatedModules": false
+    },
+    "include": [
+        "src/**/**"
+    ]
+}

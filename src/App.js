@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import CatList from './components/CatList.js'
+import { observable, action } from 'mobx';
+import { observer, inject } from 'mobx-react';
+
+import CatList from './components/CatList.js';
 
 import './App.scss';
 
+@inject("catDataStore")
+@observer
 class App extends Component {
+  @observable prevScrollpos = window.pageYOffset
+  @observable preItemsLength = 0
+  @observable itemsLength = 0
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      catList: [],
-      preItemsLength: 0,
-      itemsLength: 40,
-      prevScrollpos: window.pageYOffset
-    }
-
+  
     this.handleScroll = this.handleScroll.bind(this);
   }
 
@@ -23,6 +24,8 @@ class App extends Component {
   componentDidMount () {
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('scroll', this.infiniteScroll,true);
+    this.preItemsLength = this.props.catDataStore.preItemsLength
+    this.itemsLength = this.props.catDataStore.itemsLength
     this.getList()
   }
 
@@ -32,27 +35,19 @@ class App extends Component {
 
     const { data } = await axios.get(apiUrl)
     
-    this.setState({
-      catList: this.state.catList.concat(data.slice(this.state.preItemsLength, this.state.itemsLength))
-    })
-  }
-
-  removeCardInData = (id) => {
-    console.log('app.js')
-    this.setState({
-      catList: this.state.catList.filter(item => item._id !== id)
-    })
+    this.props.catDataStore.setCatData(this.props.catDataStore.catList.concat(data.slice(this.preItemsLength, this.itemsLength)))
+    this.props.catDataStore.setItemsLength(this.preItemsLength, this.itemsLength)
   }
 
   handleScroll () {
     let currentScrollPos = window.pageYOffset;
 
-    if (this.state.prevScrollpos > currentScrollPos) {
+    if (this.prevScrollpos > currentScrollPos) {
       document.getElementById("header").style.top = "0";
     } else {
       document.getElementById("header").style.top = "-50px";
     }
-    this.state.prevScrollpos = currentScrollPos;
+    this.prevScrollpos = currentScrollPos;
   }
 
   infiniteScroll = () => {
@@ -63,10 +58,9 @@ class App extends Component {
 
     if(scrollTop + clientHeight === scrollHeight) {
 
-      this.setState({
-        preItemsLength: this.state.itemsLength,
-        itemsLength: this.state.itemsLength+20
-      })
+
+      this.preItemsLength = this.props.catDataStore.itemsLength
+      this.itemsLength = this.props.catDataStore.itemsLength+20
       this.getList()
     }
   }
@@ -79,7 +73,7 @@ class App extends Component {
         </header>
         
         <CatList 
-          data={this.state.catList} removeCard={this.removeCardInData}>
+          data={this.props.catDataStore.catList}>
         </CatList>
       </div>
     );

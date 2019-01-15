@@ -7,13 +7,12 @@ import '../styles/CatList.scss'
 class CatList extends Component {
   static defaultProps = {
    data: [],
-   removeCard: () => console.warn('onRemove not defined')
   }
   componentDidMount() {
   }
 
   render() {
-    const { data, removeCard } = this.props;
+    const { data } = this.props;
     let adItem = {
       ad: true,
     }
@@ -32,7 +31,7 @@ class CatList extends Component {
       }
     }
 
-    const list = _.map(data, (item,index) => (<CatItem key={index} item={item} removeCard={removeCard}></CatItem>))
+    const list = _.map(data, (item,index) => (<CatItem key={index} item={item}></CatItem>))
 
     return (
       <div className="cats-sale-container">

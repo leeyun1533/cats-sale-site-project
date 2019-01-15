@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import '../styles/CatItem.scss'
+import { observable, action } from 'mobx';
+import { observer, inject } from 'mobx-react';
 
+@inject("catDataStore")
+@observer
 class CatItem extends Component {
   static defaultProps = {
     item: {
@@ -12,9 +16,8 @@ class CatItem extends Component {
         ad: false
     }
   }
-  clickRemoveButton = () => {
-    const { item, removeCard } = this.props;
-    removeCard(item._id);
+  clickRemoveButton = (id) => {
+    this.props.catDataStore.removeCard(id)
   }
 
   render() {
@@ -45,7 +48,7 @@ class CatItem extends Component {
             <div className="cat-item-detail-body">
               <p className="cat-item-detail-name">{name}</p>
               <p className="cat-item-detail-age">{age}입니다.</p>
-              <button className="cat-item-delete-button" onClick={this.clickRemoveButton}>삭제</button>
+              <button className="cat-item-delete-button" onClick={ () => this.clickRemoveButton(_id)}>삭제</button>
             </div>
           </div>         
           )}
